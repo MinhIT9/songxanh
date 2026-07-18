@@ -37,3 +37,8 @@ body.celebrating{overflow:hidden}
 .celebration-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0 25px}.celebration-stats div{display:flex;flex-direction:column;padding:13px 6px;border-radius:14px;background:#e8f4df}.celebration-stats b{font:800 1.25rem 'Baloo 2';color:var(--green)}.celebration-stats span{font-size:.6rem;font-weight:600}
 @keyframes achievementPulse{50%{transform:translateY(-5px) rotate(3deg);box-shadow:0 18px 38px rgba(103,157,31,.48)}}
 @media(max-width:575px){.celebration-card{padding:35px 20px}.celebration-card h2{font-size:2.5rem}.celebration-stats span{font-size:.52rem}.achievement-ring{width:90px;height:90px;font-size:2.2rem}}
+
+/* Balanced title spacing while keeping the first phrase on one line. */
+.hero h1{font-size:clamp(3.1rem,5.4vw,5.3rem);line-height:.95;letter-spacing:-1.4px}
+.hero h1 span{display:inline-block}.hero h1 .hero-title-line{color:var(--dark);white-space:nowrap}.hero h1>span:not(.hero-title-line){margin-top:.08em}
+@media(max-width:575px){.hero h1{font-size:clamp(2.5rem,12.2vw,2.95rem);line-height:.95;letter-spacing:-.8px}.hero h1>span:not(.hero-title-line){margin-top:.1em}}
