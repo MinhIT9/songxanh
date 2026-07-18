@@ -19,3 +19,21 @@
 .challenge-photo span{position:absolute;left:16px;right:16px;bottom:16px;padding:11px;border-radius:12px;text-align:center;background:rgba(255,255,255,.92);color:var(--dark);font-weight:700;font-size:.78rem;backdrop-filter:blur(8px)}.challenge-photo span i{color:#e9a400;margin-right:5px}
 @media(max-width:991px){.hero-photo-card{height:430px}.story-banner{height:420px}.story-caption{width:48%}.challenge-photo{height:400px;max-width:400px;margin:auto}}
 @media(max-width:575px){.hero-photo-card{height:340px}.story-banner{height:520px}.story-banner:after{background:linear-gradient(0deg,rgba(9,43,30,.94) 0%,rgba(9,43,30,.1) 75%)}.story-caption{left:25px;right:25px;bottom:22px;top:auto;transform:none;width:auto}.story-caption h3{font-size:1.8rem}.challenge-photo{height:390px}}
+
+/* 7-day challenge completion */
+.challenge-box.is-complete{box-shadow:0 0 0 3px rgba(201,243,106,.5),0 28px 80px rgba(18,58,43,.3)}
+.challenge-box.is-complete:before{content:"ĐÃ HOÀN THÀNH";position:absolute;z-index:3;right:-42px;top:28px;width:180px;padding:8px 0;text-align:center;transform:rotate(38deg);background:var(--lime);color:var(--dark);font-size:.63rem;font-weight:800;letter-spacing:1px;box-shadow:0 5px 20px rgba(0,0,0,.2)}
+.challenge-box.is-complete .progress-bar{box-shadow:0 0 18px rgba(201,243,106,.8)}
+.challenge-box.is-complete .challenge-photo{border-color:rgba(201,243,106,.65)}
+body.celebrating{overflow:hidden}
+.celebration[hidden]{display:none}.celebration{position:fixed;z-index:2000;inset:0;display:grid;place-items:center;padding:20px;background:rgba(5,27,19,.72);backdrop-filter:blur(10px);opacity:0;transition:opacity .35s ease}.celebration.show{opacity:1}
+#confettiCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.celebration-card{position:relative;z-index:1;width:min(540px,100%);padding:42px 45px;text-align:center;border-radius:30px;background:linear-gradient(145deg,#fff 0%,#f3fae8 100%);box-shadow:0 35px 100px rgba(0,0,0,.32);transform:translateY(30px) scale(.88);transition:transform .45s cubic-bezier(.2,1.4,.4,1);overflow:hidden}.celebration.show .celebration-card{transform:none}
+.celebration-card:before,.celebration-card:after{content:"";position:absolute;border-radius:50%;background:#dff3aa;z-index:-1}.celebration-card:before{width:180px;height:180px;right:-90px;top:-90px}.celebration-card:after{width:110px;height:110px;left:-55px;bottom:-55px}
+.celebration-close{position:absolute;right:17px;top:17px;width:36px;height:36px;border:0;border-radius:50%;background:#e5eee3;color:var(--dark)}
+.achievement-ring{position:relative;width:105px;height:105px;margin:0 auto 20px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#d9ff78,#83be32);color:#fff;font-size:2.7rem;box-shadow:0 12px 30px rgba(103,157,31,.35);animation:achievementPulse 1.8s ease-in-out infinite}
+.achievement-ring>span{position:absolute;right:-4px;bottom:3px;width:34px;height:34px;display:grid;place-items:center;border:4px solid #fff;border-radius:50%;background:var(--green);font-size:.8rem}
+.celebration-kicker{color:var(--green);font-size:.72rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.celebration-card h2{font-size:3rem;margin:5px 0;color:var(--dark)}.celebration-card>p{font-size:.92rem;margin:0 auto 22px;max-width:430px}
+.celebration-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0 25px}.celebration-stats div{display:flex;flex-direction:column;padding:13px 6px;border-radius:14px;background:#e8f4df}.celebration-stats b{font:800 1.25rem 'Baloo 2';color:var(--green)}.celebration-stats span{font-size:.6rem;font-weight:600}
+@keyframes achievementPulse{50%{transform:translateY(-5px) rotate(3deg);box-shadow:0 18px 38px rgba(103,157,31,.48)}}
+@media(max-width:575px){.celebration-card{padding:35px 20px}.celebration-card h2{font-size:2.5rem}.celebration-stats span{font-size:.52rem}.achievement-ring{width:90px;height:90px;font-size:2.2rem}}

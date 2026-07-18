@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Website đang bảo trì</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+        :root {
+            --primary-color: #22c55e;
+            --secondary-color: #16a34a;
+            --dark-color: #071a12;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.25), transparent 35%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.2), transparent 35%),
+                linear-gradient(135deg, #03120c, #09281b, #03120c);
+            background-size: 200% 200%;
+            animation: backgroundMove 10s ease-in-out infinite alternate;
+        }
+
+        .maintenance-page {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .maintenance-card {
+            width: 100%;
+            max-width: 720px;
+            padding: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: cardAppear 1s ease forwards;
+        }
+
+        .maintenance-icon {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            margin: 0 auto 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 48px;
+            color: #ffffff;
+            background: linear-gradient(
+                135deg,
+                var(--primary-color),
+                var(--secondary-color)
+            );
+            box-shadow: 0 0 45px rgba(34, 197, 94, 0.45);
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        .maintenance-icon::before,
+        .maintenance-icon::after {
+            content: "";
+            position: absolute;
+            inset: -12px;
+            border: 2px solid rgba(34, 197, 94, 0.45);
+            border-radius: 50%;
+            animation: pulseRing 2.2s ease-out infinite;
+        }
+
+        .maintenance-icon::after {
+            animation-delay: 1.1s;
+        }
+
+        .maintenance-title {
+            margin-bottom: 16px;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .maintenance-description {
+            max-width: 560px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding: 10px 18px;
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            border-radius: 999px;
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.12);
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 14px #4ade80;
+            animation: statusBlink 1.5s infinite;
+        }
+
+        .maintenance-progress {
+            height: 10px;
+            margin-top: 32px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .maintenance-progress .progress-bar {
+            width: 68%;
+            border-radius: 999px;
+            background: linear-gradient(
+                90deg,
+                #16a34a,
+                #4ade80,
+                #16a34a
+            );
+            background-size: 200% 100%;
+            animation: progressGlow 2s linear infinite;
+        }
+
+        .contact-link {
+            color: #86efac;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
+
+        .contact-link:hover {
+            color: #ffffff;
+        }
+
+        .floating-shape {
+            position: absolute;
+            z-index: 1;
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0.35;
+            animation: floatingShape 8s ease-in-out infinite;
+        }
+
+        .shape-one {
+            top: 8%;
+            left: 8%;
+            width: 130px;
+            height: 130px;
+            background: rgba(34, 197, 94, 0.28);
+        }
+
+        .shape-two {
+            right: 10%;
+            bottom: 9%;
+            width: 190px;
+            height: 190px;
+            background: rgba(16, 185, 129, 0.2);
+            animation-delay: -3s;
+        }
+
+        .shape-three {
+            top: 18%;
+            right: 20%;
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.12);
+            animation-delay: -5s;
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(35px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(4deg);
+            }
+        }
+
+        @keyframes pulseRing {
+            0% {
+                opacity: 0.65;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.35);
+            }
+        }
+
+        @keyframes statusBlink {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.75);
+            }
+        }
+
+        @keyframes progressGlow {
+            from {
+                background-position: 200% 0;
+            }
+
+            to {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes floatingShape {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(20px, -30px) scale(1.12);
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                overflow-y: auto;
+            }
+
+            .maintenance-card {
+                padding: 36px 22px;
+                border-radius: 24px;
+            }
+
+            .maintenance-icon {
+                width: 92px;
+                height: 92px;
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hình nền chuyển động -->
+    <div class="floating-shape shape-one"></div>
+    <div class="floating-shape shape-two"></div>
+    <div class="floating-shape shape-three"></div>
+
+    <main class="maintenance-page">
+        <section class="maintenance-card text-center">
+
+            <div class="maintenance-icon">
+                <i class="bi bi-tools"></i>
+            </div>
+
+            <h1 class="maintenance-title">
+                Website đang bảo trì
+            </h1>
+
+            <p class="maintenance-description">
+                Chúng tôi đang nâng cấp hệ thống để mang đến trải nghiệm
+                nhanh hơn, ổn định hơn và tốt hơn cho bạn.
+                Website sẽ sớm hoạt động trở lại.
+            </p>
+
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                Hệ thống đang được nâng cấp
+            </div>
+
+            <div
+                class="progress maintenance-progress"
+                role="progressbar"
+                aria-label="Tiến độ bảo trì"
+                aria-valuenow="68"
+                aria-valuemin="0"
+                aria-valuemax="100"
+            >
+                <div class="progress-bar"></div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-2 small text-white-50">
+                <span>Đang xử lý...</span>
+                <span>68%</span>
+            </div>
+
+            <div class="mt-4 pt-3 border-top border-light border-opacity-10">
+                <p class="mb-1 text-white-50">
+                    Cần hỗ trợ gấp?
+                </p>
+
+                <a href="tel:0396969342" class="contact-link">
+                    <i class="bi bi-telephone-fill me-1"></i>
+                    039 6969 342
+                </a>
+            </div>
+
+            <p class="mt-4 mb-0 small text-white-50">
+                © <span id="currentYear"></span> ALOMINH.HOMES
+            </p>
+
+        </section>
+    </main>
+
+    <script>
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+</html>
