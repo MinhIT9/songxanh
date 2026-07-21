@@ -201,6 +201,102 @@ const sectionObserver = new IntersectionObserver(entries => {
 }, { rootMargin: '-35% 0px -55% 0px' });
 sections.forEach(section => sectionObserver.observe(section));
 
+// Lightweight ripple feedback for primary actions.
+document.querySelectorAll('.ripple').forEach(button => button.addEventListener('pointerdown', event => {
+  const wave = document.createElement('span');
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  wave.className = 'ripple-wave';
+  Object.assign(wave.style, { width: `${size}px`, height: `${size}px`, left: `${event.clientX - rect.left - size / 2}px`, top: `${event.clientY - rect.top - size / 2}px` });
+  button.appendChild(wave);
+  setTimeout(() => wave.remove(), 600);
+}));
+
+// Search and dark mode are intentionally local and instant.
+document.querySelector('#searchToggle')?.addEventListener('click', () => {
+  const keyword = prompt('Bạn muốn tìm chủ đề nào?');
+  if (!keyword) return;
+  const target = [...document.querySelectorAll('main section[id]')].find(section => section.textContent.toLowerCase().includes(keyword.toLowerCase()));
+  if (target) target.scrollIntoView({ behavior: 'smooth' });
+  else alert('Chưa tìm thấy chủ đề phù hợp.');
+});
+const themeToggle = document.querySelector('#themeToggle');
+if (localStorage.getItem('greenTheme') === 'dark') document.body.classList.add('dark-mode');
+themeToggle?.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('greenTheme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+  themeToggle.firstElementChild.className = document.body.classList.contains('dark-mode') ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+});
+
+// Drag-and-drop waste sorting mini game.
+const wasteTray = document.querySelector('#wasteTray');
+if (wasteTray) {
+  const wasteItems = [['🍌 Vỏ chuối', 'organic'], ['📰 Báo cũ', 'recycle'], ['🔋 Pin', 'hazard'], ['🧻 Giấy bẩn', 'other']];
+  wasteTray.innerHTML = wasteItems.map(([label, type], index) => `<button class="waste-piece" draggable="true" data-type="${type}" data-index="${index}">${label}</button>`).join('');
+  let dragged = null;
+  document.querySelectorAll('.waste-piece').forEach(piece => piece.addEventListener('dragstart', () => { dragged = piece; }));
+  document.querySelectorAll('.bin-card').forEach(bin => {
+    bin.addEventListener('dragover', event => { event.preventDefault(); bin.classList.add('drag-over'); });
+    bin.addEventListener('dragleave', () => bin.classList.remove('drag-over'));
+    bin.addEventListener('drop', event => {
+      event.preventDefault(); bin.classList.remove('drag-over');
+      if (!dragged) return;
+      const correct = dragged.dataset.type === bin.dataset.bin;
+      document.querySelector('#binResult span').textContent = correct ? 'Chính xác! Bạn đã phân loại đúng.' : 'Chưa đúng rồi, hãy thử một thùng khác nhé!';
+      if (correct) dragged.remove();
+      dragged = null;
+    });
+  });
+}
+
+// Four-question green living quiz.
+const quizStart = document.querySelector('#quizStart');
+if (quizStart) {
+  const quiz = [
+    ['Khi ra khỏi phòng, em nên làm gì?', ['Tắt đèn và quạt', 'Để mọi thiết bị chạy'], 0],
+    ['Đồ nào nên mang theo mỗi ngày?', ['Cốc nhựa dùng một lần', 'Bình nước cá nhân'], 1],
+    ['Chai nhựa sạch thuộc nhóm nào?', ['Rác tái chế', 'Rác hữu cơ'], 0],
+    ['Cách đi lại nào xanh hơn?', ['Xe đạp', 'Xe máy cho quãng đường ngắn'], 0]
+  ];
+  let questionIndex = 0, quizPoints = 0;
+  const showQuestion = () => {
+    const current = quiz[questionIndex];
+    document.querySelector('#quizQuestion').textContent = `${questionIndex + 1}/4 · ${current[0]}`;
+    document.querySelector('#quizAnswers').innerHTML = current[1].map((answer, index) => `<button data-answer="${index}">${answer}</button>`).join('');
+    quizStart.hidden = true;
+    document.querySelectorAll('#quizAnswers button').forEach(answer => answer.addEventListener('click', () => {
+      const correct = Number(answer.dataset.answer) === current[2];
+      answer.classList.add(correct ? 'correct' : 'wrong');
+      if (correct) quizPoints++;
+      document.querySelectorAll('#quizAnswers button').forEach(item => item.disabled = true);
+      setTimeout(() => { questionIndex++; if (questionIndex < quiz.length) showQuestion(); else { document.querySelector('#quizQuestion').textContent = 'Hoàn thành!'; document.querySelector('#quizAnswers').innerHTML = ''; document.querySelector('#quizScore').textContent = `Bạn đạt ${quizPoints}/4 điểm xanh.`; if (quizPoints >= 3) launchConfetti(); } }, 550);
+    }));
+  };
+  quizStart.addEventListener('click', showQuestion);
+}
+
+// Commitment certificate preview.
+document.querySelector('#pledgeForm')?.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  document.querySelector('#certificateName').textContent = data.get('name');
+  document.querySelector('#certificateMeta').textContent = `Lớp ${data.get('class')} · ${data.get('school')}`;
+  document.querySelector('#certificate').classList.add('completed');
+  document.querySelector('#pledgeSuccess').textContent = '🎉 Chúc mừng! Bạn đã trở thành Đại sứ Sống Xanh!';
+  launchConfetti();
+});
+
+document.querySelectorAll('.resource-open').forEach((button, index) => button.addEventListener('click', () => {
+  if (index < 2) {
+    document.querySelector('#messageModalTitle').textContent = index === 0 ? 'Video Sống Xanh' : 'Bộ ảnh hành động xanh';
+    document.querySelector('#messageModal .modal-body p').textContent = 'Học liệu đang được chuẩn bị. Bạn có thể quay lại sau để khám phá nội dung mới.';
+    getMessageModal().show();
+  } else {
+    const file = new Blob(['3 bước phân loại rác: Làm sạch - Phân loại - Bỏ đúng thùng.'], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a'); link.href = URL.createObjectURL(file); link.download = 'so-tay-song-xanh.txt'; link.click(); URL.revokeObjectURL(link.href);
+  }
+}));
+
 // Cache the app shell and visited assets for instant repeat visits and offline fallback.
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));

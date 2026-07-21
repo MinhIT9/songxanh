@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#178b57">
   <meta name="description" content="Dự án Sống Xanh Khối 6 - Cùng nhau xây dựng những thói quen nhỏ vì một hành tinh xanh.">
-  <title>Sống Xanh Khối 6</title>
+  <title>Sống Xanh – Hành động nhỏ, thay đổi lớn</title>
   <link rel="canonical" href="https://songxanh.alominh.homes/">
   <meta property="og:locale" content="vi_VN">
   <meta property="og:type" content="website">
@@ -36,17 +36,22 @@
   <div class="page-progress" id="pageProgress" aria-hidden="true"></div>
   <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="#trang-chu"><span class="brand-icon"><i class="fa-solid fa-leaf"></i></span> Sống Xanh <b>6</b></a>
+      <a class="navbar-brand" href="#trang-chu"><span class="brand-icon"><i class="fa-solid fa-leaf"></i></span><span>SỐNG XANH<small>Hành động nhỏ, thay đổi lớn</small></span></a>
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-label="Mở trình đơn">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarMenu">
         <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-          <li class="nav-item"><a class="nav-link" href="#gioi-thieu">Giới thiệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#trang-chu">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gioi-thieu">Sống xanh là gì?</a></li>
+          <li class="nav-item"><a class="nav-link" href="#van-de">Vấn đề môi trường</a></li>
           <li class="nav-item"><a class="nav-link" href="#hanh-dong">Hành động xanh</a></li>
           <li class="nav-item"><a class="nav-link" href="#phan-loai">Phân loại rác</a></li>
-          <li class="nav-item"><a class="nav-link nav-cta" href="#thu-thach">Tham gia ngay <i class="fa-solid fa-arrow-right ms-1"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="#trai-nghiem">Trải nghiệm</a></li>
+          <li class="nav-item"><a class="nav-link" href="#hoc-lieu">Học liệu</a></li>
+          <li class="nav-item"><a class="nav-link nav-cta" href="#cam-ket">Cam kết</a></li>
         </ul>
+        <div class="nav-tools"><button id="searchToggle" aria-label="Tìm kiếm"><i class="fa-solid fa-magnifying-glass"></i></button><button id="themeToggle" aria-label="Đổi chế độ sáng tối"><i class="fa-solid fa-moon"></i></button><a href="#cam-ket">Đăng nhập</a></div>
       </div>
     </div>
   </nav>
@@ -58,11 +63,11 @@
         <div class="row align-items-center min-vh-100 py-5">
           <div class="col-lg-6 pt-5 reveal">
             <span class="eyebrow"><i class="fa-solid fa-seedling"></i> Dự án trải nghiệm Khối 6</span>
-            <h1><span class="hero-title-line">Việc nhỏ hôm nay,</span><br><span>Trái Đất xanh ngày mai!</span></h1>
+            <h1><span class="hero-title-line">Sống xanh hôm nay,</span><br><span>Vì Trái Đất ngày mai</span></h1>
             <p class="hero-text">Sống xanh không hề khó. Hãy cùng bắt đầu từ những thói quen đơn giản ở trường, ở nhà và lan tỏa điều tốt đẹp đến mọi người.</p>
             <div class="d-flex flex-wrap gap-3">
-              <a href="#hanh-dong" class="btn btn-green">Khám phá ngay <i class="fa-solid fa-arrow-down ms-2"></i></a>
-              <button class="btn btn-video" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="fa-solid fa-circle-play"></i> Thông điệp xanh</button>
+              <a href="#kham-pha" class="btn btn-green ripple">Bắt đầu khám phá <i class="fa-solid fa-arrow-down ms-2"></i></a>
+              <a href="#thu-thach" class="btn btn-video ripple"><i class="fa-solid fa-calendar-check"></i> Thử thách 7 ngày</a>
             </div>
             <div class="hero-stats">
               <div><b class="counter" data-target="365">0</b><span>Ngày hành động</span></div>
@@ -72,7 +77,7 @@
           </div>
           <div class="col-lg-6 mt-5 mt-lg-0 reveal delay-1">
             <div class="earth-card hero-photo-card">
-              <img src="assets/images/hero-song-xanh.png" alt="Các bạn học sinh lớp 6 cùng trồng cây, tái chế và đi xe đạp" class="hero-photo" width="1610" height="977" fetchpriority="high" decoding="async">
+              <div class="sprite-illustration scene-1" role="img" aria-label="Hai học sinh ôm Trái Đất giữa thiên nhiên xanh"></div>
               <span class="floating-badge badge-recycle"><i class="fa-solid fa-recycle"></i></span>
               <span class="floating-badge badge-water"><i class="fa-solid fa-droplet"></i></span>
               <div class="mini-note"><i class="fa-solid fa-heart"></i><div><b>Yêu thiên nhiên</b><small>Mỗi ngày một chút</small></div></div>
@@ -82,6 +87,17 @@
       </div>
       <a href="#gioi-thieu" class="scroll-hint" aria-label="Cuộn xuống"><span></span></a>
     </section>
+
+    <section class="section quick-nav" id="kham-pha"><div class="container"><div class="section-heading text-center reveal"><span class="eyebrow">Hành trình học tập</span><h2>Chọn một <span>chủ đề xanh</span></h2><p>Tám điểm dừng thú vị đang chờ bạn khám phá.</p></div><div class="quick-grid">
+      <a class="quick-card reveal" href="#gioi-thieu"><b>01</b><div class="sprite-mini scene-1"></div><h3>Sống xanh là gì?</h3><p>Khái niệm, ý nghĩa và lợi ích.</p><span>Khám phá ngay →</span></a>
+      <a class="quick-card reveal" href="#van-de"><b>02</b><div class="sprite-mini scene-2"></div><h3>Vấn đề môi trường</h3><p>Nhìn rõ bốn thách thức lớn.</p><span>Khám phá ngay →</span></a>
+      <a class="quick-card reveal" href="#hanh-dong"><b>03</b><div class="sprite-mini scene-3"></div><h3>Hành động xanh</h3><p>Việc tốt ở nhà và trường.</p><span>Khám phá ngay →</span></a>
+      <a class="quick-card reveal" href="#phan-loai"><b>04</b><div class="sprite-mini scene-4"></div><h3>Phân loại rác</h3><p>Học cách bỏ rác đúng nơi.</p><span>Khám phá ngay →</span></a>
+      <a class="quick-card reveal" href="#trai-nghiem"><b>05</b><div class="sprite-mini scene-5"></div><h3>Góc trải nghiệm</h3><p>Quiz vui và nhận điểm xanh.</p><span>Khám phá ngay →</span></a>
+      <a class="quick-card reveal" href="#thu-thach"><b>06</b><div class="sprite-mini scene-6"></div><h3>Thử thách 7 ngày</h3><p>Tạo thói quen bằng checklist.</p><span>Khám phá ngay →</span></a>
+      <a class="quick-card reveal" href="#hoc-lieu"><b>07</b><div class="sprite-mini scene-7"></div><h3>Học liệu</h3><p>Video, ảnh và infographic.</p><span>Khám phá ngay →</span></a>
+      <a class="quick-card reveal" href="#cam-ket"><b>08</b><div class="sprite-mini scene-8"></div><h3>Cam kết</h3><p>Trở thành Đại sứ Sống Xanh.</p><span>Khám phá ngay →</span></a>
+    </div></div></section>
 
     <section class="section intro" id="gioi-thieu">
       <div class="container">
@@ -101,6 +117,8 @@
         </div>
       </div>
     </section>
+
+    <section class="section environment" id="van-de"><div class="container"><div class="learning-split"><div class="sprite-illustration scene-2 reveal" role="img" aria-label="Minh họa các vấn đề môi trường"></div><div class="reveal"><span class="eyebrow">Bài học 02</span><h2>Trái Đất đang cần <span>chúng mình</span></h2><div class="issue-list"><article><i>🏭</i><div><b>Ô nhiễm không khí</b><p>Khói xe và nhà máy gây bệnh hô hấp. Đi xe đạp, trồng cây là giải pháp gần gũi.</p></div></article><article><i>🌊</i><div><b>Ô nhiễm nguồn nước</b><p>Nước thải và rác làm hại sinh vật. Không xả rác và tiết kiệm nước mỗi ngày.</p></div></article><article><i>🧴</i><div><b>Rác thải nhựa</b><p>Đồ dùng một lần tồn tại rất lâu. Hãy tái sử dụng và phân loại đúng.</p></div></article><article><i>🌡️</i><div><b>Biến đổi khí hậu</b><p>Tiết kiệm năng lượng giúp giảm khí nhà kính và thời tiết cực đoan.</p></div></article></div></div></div></div></section>
 
     <section class="section actions" id="hanh-dong">
       <div class="container">
@@ -128,9 +146,11 @@
           <div class="col-6 col-lg-3 reveal delay-2"><button class="bin-card" data-bin="other"><i class="fa-solid fa-trash-can bin dark"></i><b>Rác còn lại</b><span>Gốm vỡ, giấy bẩn...</span></button></div>
           <div class="col-6 col-lg-3 reveal delay-3"><button class="bin-card" data-bin="hazard"><i class="fa-solid fa-trash-can bin red"></i><b>Rác nguy hại</b><span>Pin, bóng đèn...</span></button></div>
         </div>
-        <div class="bin-result reveal" id="binResult"><i class="fa-solid fa-circle-info"></i><span>Chọn một thùng rác để xem hướng dẫn phân loại.</span></div>
+        <div class="waste-tray reveal" id="wasteTray" aria-label="Trò chơi kéo thả phân loại rác"></div><div class="bin-result reveal" id="binResult" aria-live="polite"><i class="fa-solid fa-circle-info"></i><span>Chọn một thùng rác để xem hướng dẫn phân loại.</span></div>
       </div>
     </section>
+
+    <section class="section experience" id="trai-nghiem"><div class="container"><div class="learning-split reverse"><div class="sprite-illustration scene-5 reveal"></div><div class="reveal"><span class="eyebrow">Học mà chơi</span><h2>Bạn sống xanh <span>đến đâu?</span></h2><div class="eco-quiz" id="ecoQuiz"><p id="quizQuestion">Nhấn “Bắt đầu” để thử sức với 4 câu hỏi xanh.</p><div id="quizAnswers" class="quiz-answers"></div><button class="btn btn-green ripple" id="quizStart">Bắt đầu quiz</button><b id="quizScore" aria-live="polite"></b></div></div></div></div></section>
 
     <section class="section challenge" id="thu-thach">
       <div class="container">
@@ -143,6 +163,12 @@
         </div>
       </div>
     </section>
+
+    <section class="section resources" id="hoc-lieu"><div class="container"><div class="section-heading text-center reveal"><span class="eyebrow">Kho khám phá</span><h2>Học liệu <span>Sống Xanh</span></h2><p>Những tài liệu trực quan để tiếp tục học và chia sẻ cùng bạn bè.</p></div><div class="resource-grid"><article class="resource-card reveal"><i class="fa-solid fa-circle-play"></i><h3>Video</h3><p>Khám phá vòng đời của rác và năng lượng xanh.</p><button class="resource-open">Mở xem</button></article><article class="resource-card reveal"><i class="fa-solid fa-images"></i><h3>Hình ảnh</h3><p>Bộ ảnh hành động xanh dễ nhớ, dễ thực hiện.</p><button class="resource-open">Mở xem</button></article><article class="resource-card reveal"><i class="fa-solid fa-chart-simple"></i><h3>Infographic</h3><p>Ba bước phân loại rác đúng cách tại trường.</p><button class="resource-open">Tải xuống</button></article></div></div></section>
+
+    <section class="section pledge" id="cam-ket"><div class="container"><div class="section-heading text-center reveal"><span class="eyebrow">Bài học 08</span><h2>Trở thành <span>Đại sứ Sống Xanh</span></h2></div><div class="pledge-grid"><form class="pledge-form reveal" id="pledgeForm"><label>Họ và tên<input name="name" required maxlength="60"></label><label>Lớp<input name="class" required maxlength="20"></label><label>Trường<input name="school" required maxlength="80"></label><label>Nội dung cam kết<textarea name="pledge" required rows="4" placeholder="Em sẽ..."></textarea></label><button class="btn btn-green ripple">Gửi cam kết</button></form><div class="certificate-preview reveal" id="certificate"><div class="sprite-mini scene-8"></div><small>GIẤY CHỨNG NHẬN</small><h3>ĐẠI SỨ SỐNG XANH</h3><p>Trao tặng cho</p><b id="certificateName">Tên của bạn</b><p id="certificateMeta">Lớp · Trường</p><span>🌿 Cùng hành động vì Trái Đất 🌿</span></div></div><p class="pledge-success" id="pledgeSuccess" aria-live="polite"></p></div></section>
+
+    <section class="green-stats"><div><i>🌳</i><b class="counter" data-target="500">0</b><span>Hành động xanh</span></div><div><i>♻️</i><b class="counter" data-target="100">0</b><span>Bài học</span></div><div><i>📚</i><b class="counter" data-target="30">0</b><span>Học liệu</span></div><div><i>🏅</i><b class="counter" data-target="1000">0</b><span>Đại sứ Sống Xanh</span></div></section>
 
     <div class="celebration" id="celebration" role="dialog" aria-modal="true" aria-labelledby="celebrationTitle" hidden>
       <canvas id="confettiCanvas" aria-hidden="true"></canvas>
@@ -157,10 +183,8 @@
       </div>
     </div>
 
-    <section class="quote-section"><div class="container text-center reveal"><i class="fa-solid fa-quote-left"></i><blockquote>“Chúng ta không thừa kế Trái Đất từ tổ tiên,<br>chúng ta mượn nó từ thế hệ tương lai.”</blockquote><p>— Thông điệp sống xanh —</p></div></section>
+    <section class="closing-banner"><div class="closing-decor">🌿 🌼 🌍 🌸 🍃</div><h2>“Mỗi hành động xanh hôm nay sẽ góp phần tạo nên một Trái Đất tươi đẹp cho ngày mai.”</h2><a class="btn closing-btn ripple" href="#trang-chu"><i class="fa-solid fa-arrow-up"></i> Quay lại đầu trang</a></section>
   </main>
-
-  <footer><div class="container"><div class="row align-items-center gy-4"><div class="col-md-5"><a class="navbar-brand text-white" href="#trang-chu"><span class="brand-icon"><i class="fa-solid fa-leaf"></i></span> Sống Xanh <b>6</b></a><p>Dự án học tập vì một tương lai xanh hơn.</p></div><div class="col-md-4"><h4>Khám phá</h4><a href="#gioi-thieu">Vì sao sống xanh?</a><a href="#hanh-dong">Hành động mỗi ngày</a><a href="#thu-thach">Thử thách 7 ngày</a></div><div class="col-md-3"><h4>Cùng lan tỏa</h4><div class="socials"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a></div></div></div><div class="copyright">© 2026 Dự án Sống Xanh Khối 6. <span class="footer-separator">•</span> Thực hiện bởi <span class="author-credit"><i class="fa-solid fa-seedling"></i> Dương Thị Thảo</span> <span class="footer-separator">•</span> Với <i class="fa-solid fa-heart"></i> vì Trái Đất.</div></div></footer>
 
   <button id="backToTop" aria-label="Lên đầu trang"><i class="fa-solid fa-arrow-up"></i></button>
   <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><button type="button" class="btn-close" id="closeMessageModal" aria-label="Đóng"></button><div class="modal-body text-center p-5"><div class="modal-leaf"><i class="fa-solid fa-leaf"></i></div><h2 id="messageModalTitle">Một màu xanh, triệu hy vọng!</h2><p>Hãy bắt đầu bằng một việc nhỏ ngay hôm nay. Khi hàng triệu việc nhỏ cùng xảy ra, Trái Đất sẽ thay đổi.</p><button type="button" id="startChallengeButton" class="btn btn-green">Nhận thử thách</button></div></div></div></div>
