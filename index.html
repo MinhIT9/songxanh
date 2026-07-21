@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#178b57">
   <meta name="description" content="Dự án Sống Xanh Khối 6 - Cùng nhau xây dựng những thói quen nhỏ vì một hành tinh xanh.">
   <title>Sống Xanh Khối 6</title>
   <link rel="canonical" href="https://songxanh.alominh.homes/">
@@ -22,6 +23,8 @@
   <meta name="twitter:title" content="Sống Xanh Khối 6">
   <meta name="twitter:description" content="Việc nhỏ hôm nay, Trái Đất xanh ngày mai!">
   <meta name="twitter:image" content="https://songxanh.alominh.homes/assets/images/ og-song-xanh-khoi-6.jpg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preload" href="assets/images/hero-song-xanh.png" as="image" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,6 +33,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="page-progress" id="pageProgress" aria-hidden="true"></div>
   <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="#trang-chu"><span class="brand-icon"><i class="fa-solid fa-leaf"></i></span> Sống Xanh <b>6</b></a>
@@ -68,7 +72,7 @@
           </div>
           <div class="col-lg-6 mt-5 mt-lg-0 reveal delay-1">
             <div class="earth-card hero-photo-card">
-              <img src="assets/images/hero-song-xanh.png" alt="Các bạn học sinh lớp 6 cùng trồng cây, tái chế và đi xe đạp" class="hero-photo">
+              <img src="assets/images/hero-song-xanh.png" alt="Các bạn học sinh lớp 6 cùng trồng cây, tái chế và đi xe đạp" class="hero-photo" width="1610" height="977" fetchpriority="high" decoding="async">
               <span class="floating-badge badge-recycle"><i class="fa-solid fa-recycle"></i></span>
               <span class="floating-badge badge-water"><i class="fa-solid fa-droplet"></i></span>
               <div class="mini-note"><i class="fa-solid fa-heart"></i><div><b>Yêu thiên nhiên</b><small>Mỗi ngày một chút</small></div></div>
@@ -92,7 +96,7 @@
           <div class="col-md-4 reveal delay-2"><article class="info-card green"><div class="card-icon"><i class="fa-solid fa-tree"></i></div><span>03</span><h3>Thiên nhiên cần bạn</h3><p>Bảo vệ cây xanh, nguồn nước và động vật chính là bảo vệ tương lai của chúng ta.</p></article></div>
         </div>
         <div class="story-banner reveal">
-          <img src="assets/images/lop-hoc-tai-che.png" alt="Học sinh làm đồ thủ công tái chế và chăm sóc cây trong lớp học" loading="lazy">
+          <img src="assets/images/lop-hoc-tai-che.png" alt="Học sinh làm đồ thủ công tái chế và chăm sóc cây trong lớp học" width="1536" height="1024" loading="lazy" decoding="async">
           <div class="story-caption"><span><i class="fa-solid fa-camera"></i> Góc xanh lớp mình</span><h3>Biến đồ cũ thành niềm vui mới</h3><p>Từ chai nhựa, giấy đã dùng và những chiếc hộp nhỏ, chúng mình có thể sáng tạo nên nhiều vật dụng đáng yêu.</p></div>
         </div>
       </div>
@@ -133,7 +137,7 @@
         <div class="challenge-box reveal" id="challengeBox">
           <div class="row align-items-center g-4">
             <div class="col-lg-4"><span class="eyebrow light">Thử thách dành cho bạn</span><h2>7 ngày sống xanh</h2><p>Hoàn thành một hành động mỗi ngày. Đánh dấu và cùng bạn bè tạo nên một tuần thật ý nghĩa!</p><div class="progress-wrap"><div class="d-flex justify-content-between"><span>Tiến độ của bạn</span><b id="progressText">0/7 ngày</b></div><div class="progress"><div class="progress-bar" id="challengeProgress"></div></div></div></div>
-            <div class="col-lg-4"><div class="challenge-photo"><img src="assets/images/thu-thach-xanh.png" alt="Hai học sinh hoàn thành thử thách sống xanh" loading="lazy"><span><i class="fa-solid fa-medal"></i> Cùng nhau hoàn thành!</span></div></div>
+            <div class="col-lg-4"><div class="challenge-photo"><img src="assets/images/thu-thach-xanh.png" alt="Hai học sinh hoàn thành thử thách sống xanh" width="1024" height="1536" loading="lazy" decoding="async"><span><i class="fa-solid fa-medal"></i> Cùng nhau hoàn thành!</span></div></div>
             <div class="col-lg-4"><div class="check-list" id="checkList"></div><button class="reset-btn" id="resetChallenge"><i class="fa-solid fa-rotate-left"></i> Làm lại thử thách</button></div>
           </div>
         </div>

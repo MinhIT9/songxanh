@@ -1,18 +1,36 @@
 const nav = document.querySelector('#mainNav');
 const backToTop = document.querySelector('#backToTop');
+const pageProgress = document.querySelector('#pageProgress');
 
 function handleScroll() {
   nav.classList.toggle('scrolled', window.scrollY > 40);
   backToTop.classList.toggle('show', window.scrollY > 500);
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  pageProgress.style.width = `${scrollable > 0 ? window.scrollY / scrollable * 100 : 0}%`;
 }
 window.addEventListener('scroll', handleScroll, { passive: true });
 handleScroll();
 
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', () => {
+document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
+  link.addEventListener('click', event => {
+    const target = document.querySelector(link.hash);
+    if (!target) return;
+    event.preventDefault();
     const openMenu = document.querySelector('.navbar-collapse.show');
     if (openMenu) bootstrap.Collapse.getOrCreateInstance(openMenu).hide();
+    const navigate = () => {
+      history.pushState(null, '', link.hash);
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.startViewTransition(navigate);
+    } else navigate();
   });
+});
+
+window.addEventListener('popstate', () => {
+  const target = document.querySelector(location.hash || '#trang-chu');
+  target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -82,7 +100,15 @@ const challenges = [
   'Đi bộ hoặc đi xe đạp', 'Ăn hết phần thức ăn', 'Chăm sóc một chậu cây', 'Chia sẻ lối sống xanh'
 ];
 const checkList = document.querySelector('#checkList');
-let checked = JSON.parse(localStorage.getItem('greenChallenge') || '[]');
+let checked = [];
+try {
+  const savedChallenge = JSON.parse(localStorage.getItem('greenChallenge') || '[]');
+  checked = Array.isArray(savedChallenge)
+    ? savedChallenge.filter(item => Number.isInteger(item) && item >= 0 && item < challenges.length)
+    : [];
+} catch {
+  localStorage.removeItem('greenChallenge');
+}
 const challengeBox = document.querySelector('#challengeBox');
 const celebration = document.querySelector('#celebration');
 
@@ -174,3 +200,8 @@ const sectionObserver = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '-35% 0px -55% 0px' });
 sections.forEach(section => sectionObserver.observe(section));
+
+// Cache the app shell and visited assets for instant repeat visits and offline fallback.
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}

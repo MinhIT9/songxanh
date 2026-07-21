@@ -49,3 +49,9 @@ body.celebrating{overflow:hidden}
 .hero h1{font-size:clamp(3.1rem,5.4vw,5.3rem);line-height:.95;letter-spacing:-1.4px}
 .hero h1 span{display:inline-block}.hero h1 .hero-title-line{color:var(--dark);white-space:nowrap}.hero h1>span:not(.hero-title-line){margin-top:.08em}
 @media(max-width:575px){.hero h1{font-size:clamp(2.5rem,12.2vw,2.95rem);line-height:.95;letter-spacing:-.8px}.hero h1>span:not(.hero-title-line){margin-top:.1em}}
+
+/* SPA-like navigation and rendering performance */
+.page-progress{position:fixed;z-index:3000;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--green),var(--lime));box-shadow:0 0 12px var(--green);transition:width .12s linear;pointer-events:none}
+.section,.quote-section{content-visibility:auto;contain-intrinsic-size:800px}.hero-photo,.story-banner img,.challenge-photo img{background:#e9f4e7}
+@supports(view-transition-name:root){::view-transition-old(root){animation:spaFadeOut .18s ease both}::view-transition-new(root){animation:spaFadeIn .3s ease both}}
+@keyframes spaFadeOut{to{opacity:.45;transform:translateY(-5px)}}@keyframes spaFadeIn{from{opacity:.25;transform:translateY(8px)}}
