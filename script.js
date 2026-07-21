@@ -72,7 +72,7 @@ const counterObserver = new IntersectionObserver(entries => {
     const started = performance.now();
     function update(now) {
       const progress = Math.min((now - started) / 1200, 1);
-      el.textContent = Math.floor(target * (1 - Math.pow(1 - progress, 3)));
+      el.textContent = Math.floor(target * (1 - Math.pow(1 - progress, 3))).toLocaleString('vi-VN');
       if (progress < 1) requestAnimationFrame(update);
     }
     requestAnimationFrame(update);
@@ -231,7 +231,7 @@ themeToggle?.addEventListener('click', () => {
 // Drag-and-drop waste sorting mini game.
 const wasteTray = document.querySelector('#wasteTray');
 if (wasteTray) {
-  const wasteItems = [['🍌 Vỏ chuối', 'organic'], ['📰 Báo cũ', 'recycle'], ['🔋 Pin', 'hazard'], ['🧻 Giấy bẩn', 'other']];
+  const wasteItems = [['🍌 Vỏ chuối', 'organic'], ['📰 Báo cũ', 'recycle'], ['💡 Bóng đèn hỏng', 'other'], ['🧻 Giấy bẩn', 'other']];
   wasteTray.innerHTML = wasteItems.map(([label, type], index) => `<button class="waste-piece" draggable="true" data-type="${type}" data-index="${index}">${label}</button>`).join('');
   let dragged = null;
   document.querySelectorAll('.waste-piece').forEach(piece => piece.addEventListener('dragstart', () => { dragged = piece; }));
