@@ -300,17 +300,6 @@ document.querySelector('#pledgeForm')?.addEventListener('submit', event => {
   launchConfetti();
 });
 
-document.querySelectorAll('.resource-open').forEach((button, index) => button.addEventListener('click', () => {
-  if (index < 2) {
-    document.querySelector('#messageModalTitle').textContent = index === 0 ? 'Video Sống Xanh' : 'Bộ ảnh hành động xanh';
-    document.querySelector('#messageModal .modal-body p').textContent = 'Học liệu đang được chuẩn bị. Bạn có thể quay lại sau để khám phá nội dung mới.';
-    getMessageModal().show();
-  } else {
-    const file = new Blob(['3 bước phân loại rác: Làm sạch - Phân loại - Bỏ đúng thùng.'], { type: 'text/plain;charset=utf-8' });
-    const link = document.createElement('a'); link.href = URL.createObjectURL(file); link.download = 'so-tay-song-xanh.txt'; link.click(); URL.revokeObjectURL(link.href);
-  }
-}));
-
 // Cache the app shell and visited assets for instant repeat visits and offline fallback.
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
