@@ -249,30 +249,44 @@ if (wasteTray) {
   });
 }
 
-// Four-question green living quiz.
+// Ten-question green living quiz.
 const quizStart = document.querySelector('#quizStart');
 if (quizStart) {
   const quiz = [
-    ['Khi ra khỏi phòng, em nên làm gì?', ['Tắt đèn và quạt', 'Để mọi thiết bị chạy'], 0],
-    ['Đồ nào nên mang theo mỗi ngày?', ['Cốc nhựa dùng một lần', 'Bình nước cá nhân'], 1],
-    ['Chai nhựa sạch thuộc nhóm nào?', ['Rác tái chế', 'Rác hữu cơ'], 0],
-    ['Cách đi lại nào xanh hơn?', ['Xe đạp', 'Xe máy cho quãng đường ngắn'], 0]
+    ['Khi ra khỏi phòng học, em nên làm gì?', ['Tắt đèn, quạt và các thiết bị điện khi không sử dụng.', 'Chỉ tắt quạt.', 'Để nguyên vì sẽ có người khác tắt.', 'Không cần tắt.'], 0],
+    ['Đâu là hành động giúp tiết kiệm nước?', ['Khóa vòi nước khi không sử dụng.', 'Để vòi nước chảy liên tục khi đánh răng.', 'Rửa xe bằng vòi phun mạnh.', 'Mở nước thật lớn khi rửa tay.'], 0],
+    ['Vỏ chuối sau khi ăn thuộc loại rác nào?', ['Rác hữu cơ.', 'Rác tái chế.', 'Rác còn lại.', 'Rác nguy hại.'], 0],
+    ['Em nên làm gì với chai nhựa đã sử dụng?', ['Bỏ vào thùng rác tái chế.', 'Vứt xuống đất.', 'Đốt bỏ.', 'Bỏ vào thùng rác hữu cơ.'], 0],
+    ['Việc nào sau đây góp phần giảm ô nhiễm không khí?', ['Trồng thêm cây xanh.', 'Đốt rác ngoài trời.', 'Xả khói xe nhiều.', 'Chặt cây lấy đất trống.'], 0],
+    ['Khi đi học, em nên mang theo gì để hạn chế rác thải nhựa?', ['Bình nước cá nhân.', 'Ly nhựa dùng một lần.', 'Chai nước mới mỗi ngày.', 'Túi nilon.'], 0],
+    ['Nếu thấy bạn xả rác không đúng nơi quy định, em sẽ làm gì?', ['Nhắc bạn bỏ rác đúng nơi.', 'Làm ngơ.', 'Cười theo.', 'Xả rác cùng bạn.'], 0],
+    ['Hành động nào dưới đây là tái sử dụng?', ['Dùng lại hộp giấy để đựng đồ.', 'Vứt hộp giấy sau khi dùng.', 'Đốt giấy.', 'Xả giấy xuống cống.'], 0],
+    ['Khí nào là nguyên nhân chính gây hiệu ứng nhà kính?', ['Khí CO₂.', 'Khí Oxy.', 'Khí Nitơ.', 'Khí Heli.'], 0],
+    ['“Sống xanh” có nghĩa là gì?', ['Thực hiện những hành động thân thiện với môi trường và sử dụng tài nguyên hợp lý.', 'Chỉ mặc quần áo màu xanh.', 'Chỉ trồng thật nhiều cây.', 'Chỉ tham gia dọn rác một lần.'], 0]
   ];
   let questionIndex = 0, quizPoints = 0;
   const showQuestion = () => {
     const current = quiz[questionIndex];
-    document.querySelector('#quizQuestion').textContent = `${questionIndex + 1}/4 · ${current[0]}`;
-    document.querySelector('#quizAnswers').innerHTML = current[1].map((answer, index) => `<button data-answer="${index}">${answer}</button>`).join('');
+    document.querySelector('#quizQuestion').textContent = `Câu ${questionIndex + 1}/10 · ${current[0]}`;
+    document.querySelector('#quizAnswers').innerHTML = current[1].map((answer, index) => `<button data-answer="${index}"><b>${String.fromCharCode(65 + index)}.</b> ${answer}</button>`).join('');
     quizStart.hidden = true;
     document.querySelectorAll('#quizAnswers button').forEach(answer => answer.addEventListener('click', () => {
       const correct = Number(answer.dataset.answer) === current[2];
       answer.classList.add(correct ? 'correct' : 'wrong');
       if (correct) quizPoints++;
-      document.querySelectorAll('#quizAnswers button').forEach(item => item.disabled = true);
-      setTimeout(() => { questionIndex++; if (questionIndex < quiz.length) showQuestion(); else { document.querySelector('#quizQuestion').textContent = 'Hoàn thành!'; document.querySelector('#quizAnswers').innerHTML = ''; document.querySelector('#quizScore').textContent = `Bạn đạt ${quizPoints}/4 điểm xanh.`; if (quizPoints >= 3) launchConfetti(); } }, 550);
+      document.querySelectorAll('#quizAnswers button').forEach((item, index) => { item.disabled = true; if (index === current[2]) item.classList.add('correct'); });
+      setTimeout(() => {
+        questionIndex++;
+        if (questionIndex < quiz.length) return showQuestion();
+        const result = quizPoints >= 9 ? ['🏅 Đại sứ Sống Xanh', 'Tuyệt vời! Em đã có kiến thức và thói quen sống xanh rất tốt.'] : quizPoints >= 7 ? ['🌿 Chiến binh Xanh', 'Em đang thực hiện nhiều hành động tích cực, hãy tiếp tục phát huy.'] : quizPoints >= 5 ? ['🌱 Mầm Xanh', 'Em đã có nền tảng, hãy rèn luyện thêm những thói quen tốt mỗi ngày.'] : ['🍀 Khởi đầu Xanh', 'Hãy bắt đầu từ những việc nhỏ như tiết kiệm điện, nước và phân loại rác.'];
+        document.querySelector('#quizQuestion').textContent = `Hoàn thành · ${quizPoints}/10 điểm`;
+        document.querySelector('#quizAnswers').innerHTML = '';
+        document.querySelector('#quizScore').innerHTML = `<strong>${result[0]}</strong><span>${result[1]}</span>`;
+        if (quizPoints >= 7) launchConfetti();
+      }, 700);
     }));
   };
-  quizStart.addEventListener('click', showQuestion);
+  quizStart.addEventListener('click', () => { questionIndex = 0; quizPoints = 0; document.querySelector('#quizScore').textContent = ''; showQuestion(); });
 }
 
 // Commitment certificate preview.
