@@ -1,4 +1,4 @@
-const VERSION='song-xanh-v12.2.1';
+const VERSION='song-xanh-v12.3.0';
 const APP_SHELL=['./','./index.html','./style.css','./script.js','./manifest.webmanifest','./assets/images/song-xanh-learning-sprite.png','./assets/images/og-song-xanh-khoi-6.jpg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(VERSION).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==VERSION).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));

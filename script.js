@@ -11,6 +11,33 @@ function handleScroll() {
 window.addEventListener('scroll', handleScroll, { passive: true });
 handleScroll();
 
+const navLinks = [...document.querySelectorAll('.nav-link[href^="#"]')];
+const pageSections = [...document.querySelectorAll('main > section[id]')];
+let activeScrollFrame = 0;
+
+function setActiveNav(id) {
+  const menuId = id === 'kham-pha' ? 'trang-chu' : id === 'thu-thach' ? 'trai-nghiem' : id;
+  navLinks.forEach(link => {
+    const active = link.hash === `#${menuId}`;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+}
+
+function updateActiveNav() {
+  activeScrollFrame = 0;
+  const marker = window.scrollY + nav.offsetHeight + 48;
+  let current = pageSections[0]?.id || 'trang-chu';
+  pageSections.forEach(section => { if (section.offsetTop <= marker) current = section.id; });
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = pageSections.at(-1)?.id || current;
+  setActiveNav(current);
+}
+
+window.addEventListener('scroll', () => {
+  if (!activeScrollFrame) activeScrollFrame = requestAnimationFrame(updateActiveNav);
+}, { passive: true });
+
 document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
   link.addEventListener('click', event => {
     const target = document.querySelector(link.hash);
@@ -18,20 +45,22 @@ document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
     event.preventDefault();
     const openMenu = document.querySelector('.navbar-collapse.show');
     if (openMenu) bootstrap.Collapse.getOrCreateInstance(openMenu).hide();
-    const navigate = () => {
-      history.pushState(null, '', link.hash);
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-    if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.startViewTransition(navigate);
-    } else navigate();
+    setActiveNav(target.id);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targetTop = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 76);
+    history.pushState(null, '', link.hash);
+    requestAnimationFrame(() => window.scrollTo({ top: targetTop, behavior: reducedMotion ? 'auto' : 'smooth' }));
   });
 });
 
 window.addEventListener('popstate', () => {
   const target = document.querySelector(location.hash || '#trang-chu');
-  target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!target) return;
+  setActiveNav(target.id);
+  const targetTop = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 76);
+  window.scrollTo({ top: targetTop, behavior: 'smooth' });
 });
+updateActiveNav();
 
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
@@ -189,17 +218,6 @@ function launchConfetti() {
   }
   requestAnimationFrame(animate);
 }
-
-const sections = document.querySelectorAll('main section[id]');
-const links = document.querySelectorAll('.nav-link[href^="#"]');
-const sectionObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
-    }
-  });
-}, { rootMargin: '-35% 0px -55% 0px' });
-sections.forEach(section => sectionObserver.observe(section));
 
 // Lightweight ripple feedback for primary actions.
 document.querySelectorAll('.ripple').forEach(button => button.addEventListener('pointerdown', event => {
