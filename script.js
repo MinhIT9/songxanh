@@ -16,7 +16,7 @@ const pageSections = [...document.querySelectorAll('main > section[id]')];
 let activeScrollFrame = 0;
 
 function setActiveNav(id) {
-  const menuId = id === 'kham-pha' ? 'trang-chu' : id === 'thu-thach' ? 'trai-nghiem' : id;
+  const menuId = id === 'thu-thach' ? 'trai-nghiem' : id;
   navLinks.forEach(link => {
     const active = link.hash === `#${menuId}`;
     link.classList.toggle('active', active);
